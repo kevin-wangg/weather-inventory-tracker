@@ -4,7 +4,7 @@ import { Card, Container, Button, Row } from 'react-bootstrap'
 
 import NavComp from './NavComp'
 
-const ItemBrowser = () => {
+const ViewDeleted = () => {
     const [itemList, setItemList] = useState([])
 
     const GET_ITEMS = gql`
@@ -21,25 +21,12 @@ const ItemBrowser = () => {
             }
         }
     `
-    const DELETE_ITEM = gql`
-        mutation deleteItem($id: ID!) {
-            deleteItem(_id: $id) {
-                success
-                message
-            }
-        }
-    `
     useQuery(GET_ITEMS, {
         onCompleted: (data) => {
             console.log(data)
-            setItemList(data.getAllItems.filter(item => item.data.deleted === false))
+            setItemList(data.getAllItems.filter(item => item.data.deleted === true))
         }
     })
-    const [deleteItemMutation] = useMutation(DELETE_ITEM)
-    const deleteItem = (_id) => {
-        deleteItemMutation({variables: { id: _id}})
-        setItemList(oldItemList => oldItemList.filter(item => item.data._id !== _id))
-    }
     return (
         <>
             <NavComp />
@@ -59,7 +46,6 @@ const ItemBrowser = () => {
                                 <b>Weather: </b> {item.weather}
                             </Card.Text>
                             <Button variant="secondary" href={`/edit/${item.data._id}`}>Edit</Button>{' '}
-                            <Button variant="danger" onClick={() => deleteItem(item.data._id)}>Delete</Button>
                             </Card.Body>
                         </Card>
                     })}
@@ -69,4 +55,4 @@ const ItemBrowser = () => {
     )
 }
 
-export default ItemBrowser
+export default ViewDeleted

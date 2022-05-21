@@ -30,6 +30,7 @@ const typeDefs = gql`
         name: String!
         price: Float!
         city: String!
+        deleted: Boolean!
     }
     type ServerResponse {
         success: Boolean

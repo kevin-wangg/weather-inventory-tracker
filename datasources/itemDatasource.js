@@ -3,7 +3,6 @@ const ItemModel = require('../models/item.model')
 class ItemDatasource {
 
     async getAllItems() {
-        console.log('getting all items')
         const promise = ItemModel.find().exec()
         return promise
     }
@@ -20,7 +19,7 @@ class ItemDatasource {
     }
 
     async deleteItem(_id) {
-        const promise = await ItemModel.deleteOne({_id: _id})
+        const promise = await ItemModel.updateOne({_id: _id}, { deleted: true })
         return promise
     }
 

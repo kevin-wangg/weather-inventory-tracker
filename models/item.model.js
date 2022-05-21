@@ -9,6 +9,9 @@ const ItemSchema = new Schema({
     },
     city: {
         type: String, required: true
+    },
+    deleted: {
+        type: Boolean, required: true, default: false
     }
 }, {
     timestamps: true

@@ -12,6 +12,7 @@ const NavComp = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="/addItem">Add item</Nav.Link>
+                        <Nav.Link href="/viewDeleted">View Deleted Items</Nav.Link>
                     </Nav>
                     </Navbar.Collapse>
                 </Container>
