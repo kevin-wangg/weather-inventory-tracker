@@ -47,7 +47,6 @@ const EditItem = () => {
             window.alert('Price is invalid')
         }
         else {
-            console.log(`Update item ${id} ${name} ${price}`)
             updateItem({ variables: { id: id, name: name, price: Number(price) } })
                 .then(() => {
                     window.location = '/'

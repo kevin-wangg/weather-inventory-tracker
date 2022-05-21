@@ -25,7 +25,6 @@ const AddItem = () => {
         setPrice(e.target.value)
     }
     const onChangeCity = (e) => {
-        console.log(e.target.value)
         setCity(e.target.value)
     }
     const onSubmit = (e) => {
@@ -34,7 +33,6 @@ const AddItem = () => {
             window.alert('Price is invalid')
         }
         else {
-            console.log(`Create item ${name} ${price} ${city}`)
             addItem({ variables: { name: name, price: Number(price), city: city } })
                 .then(() => {
                     window.location = '/'

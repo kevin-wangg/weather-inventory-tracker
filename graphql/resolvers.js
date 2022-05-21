@@ -34,6 +34,9 @@ const resolvers = {
                         'message': 'Item successfully added'
                     }
                 })
+                .catch(e => {
+                    console.error(e)
+                })
         },
         updateItem: (_, { _id, name, price, city }, { dataSources }) => {
             return dataSources.items.updateItem(_id, name, price, city)
@@ -43,15 +46,20 @@ const resolvers = {
                         'message': 'Item successfully updated'
                     }
                 })
+                .catch(e => {
+                    console.error(e)
+                })
         },
         deleteItem: (_, { _id, message }, { dataSources }) => {
-            console.log(`Delete item: ${_id} with message ${message}`)
             return dataSources.items.deleteItem(_id, message)
                 .then(() => {
                     return {
                         'success': true,
                         'message': 'Item successfully deleted'
                     }
+                })
+                .catch(e => {
+                    console.error(e)
                 })
         },
         undeleteItem: (_, { _id }, { dataSources }) => {
@@ -61,6 +69,9 @@ const resolvers = {
                         'success': true,
                         'message': 'Item Successfully undeleted'
                     }
+                })
+                .catch(e => {
+                    console.error(e)
                 })
         }
     }

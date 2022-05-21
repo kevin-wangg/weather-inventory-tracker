@@ -36,7 +36,6 @@ const ViewDeleted = () => {
     }
     useQuery(GET_ITEMS, {
         onCompleted: (data) => {
-            console.log(data)
             setItemList(data.getAllItems.filter(item => item.data.deleted === true))
         }
     })
