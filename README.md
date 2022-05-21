@@ -1,6 +1,6 @@
 # Shopify Technical Challenge
 
-This is my submissions for the Shopify Backend Developer Challenge.
+This is my submission for the Shopify Production Engineer Challenge.
 
 # Description
 
@@ -10,15 +10,11 @@ This is an inventory tracking web application. The backend was built with Node.j
 - Update items
 - View the items as a list
 
-Additionally, you are able to export the inventory items into CSV format and download it.
-
 # How to run
-
-A live version of this web application can be found at https://shopify-inventory-tracker.herokuapp.com/
 
 To run this locally, first clone the repository with 
 
-```git clone https://github.com/kevin-wangg/inventory_tracker.git```
+```git clone https://github.com/kevin-wangg/weather-inventory_tracker.git```
 
 Then from the root directory run
 
