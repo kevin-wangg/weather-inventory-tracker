@@ -11,35 +11,6 @@ import {
 
 import NavComp from './NavComp'
 
-function MyVerticallyCenteredModal(props) {
-    return (
-        <Modal
-            {...props}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-        >
-            <Modal.Body>
-                <h4>Enter deletion comment</h4>
-                <Form.Group >
-                    <Form.Control type="text"
-                        onChange={props.onMessageChange}
-                        value={props.message}
-                        placeholder="Leave blank for no deletion message"
-                    />
-                </Form.Group>
-
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={props.onHide}>Cancel</Button>
-                <Button variant="danger" type="submit" onClick={() => props.onSubmit(props.focusedItem)}>
-                    Delete
-                </Button>
-            </Modal.Footer>
-        </Modal>
-    );
-}
-
 const ItemBrowser = () => {
     const [itemList, setItemList] = useState([])
     const [showModal, setShowModal] = useState(false)
@@ -73,16 +44,16 @@ const ItemBrowser = () => {
             setItemList(data.getAllItems.filter(item => item.data.deleted === false))
         }
     })
-    const onMessageChange = (e) => {
+    const handleMessageChange = (e) => {
         setMessage(e.target.value)
     }
     const onHide = () => {
         setShowModal(false)
         setMessage('')
     }
-    const onSubmit = (_id) => {
+    const onSubmit = () => {
         onHide()
-        deleteItem(_id, message)
+        deleteItem(focusedItem, message)
     }
     const [deleteItemMutation] = useMutation(DELETE_ITEM)
     const deleteItem = (_id, message) => {
@@ -108,7 +79,7 @@ const ItemBrowser = () => {
                                     <b>Weather: </b> {item.weather}
                                 </Card.Text>
                                 <Button variant="secondary" href={`/edit/${item.data._id}`}>Edit</Button>{' '}
-                                <Button variant="danger" onClick={() => {setShowModal(true); setFocusedItem(item.data._id)}}>
+                                <Button variant="danger" onClick={() => { setShowModal(true); setFocusedItem(item.data._id) }}>
                                     Delete
                                 </Button>
                             </Card.Body>
@@ -116,14 +87,30 @@ const ItemBrowser = () => {
                     })}
                 </Row>
             </Container>
-            <MyVerticallyCenteredModal
+            <Modal
                 show={showModal}
-                onHide={onHide}
-                onMessageChange={onMessageChange}
-                message={message}
-                focusedItem={focusedItem}
-                onSubmit={onSubmit}
-            />
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Body>
+                    <h4>Enter deletion comment</h4>
+                    <Form.Group >
+                        <Form.Control type="text"
+                            onChange={handleMessageChange}
+                            value={message}
+                            placeholder="Leave blank for no deletion message"
+                        />
+                    </Form.Group>
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={onHide}>Cancel</Button>
+                    <Button variant="danger" type="submit" onClick={onSubmit}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     )
 }

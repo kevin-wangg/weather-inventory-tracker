@@ -18,11 +18,16 @@ const resolvers = {
                     return newItems
                 })
             })
+            .catch(e => {
+                console.error(e)
+            })
             return allItemsPromise
         },
         getItem: (_, { _id }, { dataSources }) => {
-            item = dataSources.items.getItem(_id)
-            return item
+            return dataSources.items.getItem(_id)
+                .catch(e => {
+                    console.error(e)
+                })
         }
     },
     Mutation: {
