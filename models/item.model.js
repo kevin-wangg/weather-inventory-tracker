@@ -12,6 +12,9 @@ const ItemSchema = new Schema({
     },
     deleted: {
         type: Boolean, required: true, default: false
+    },
+    message: {
+        type: String, default: ''
     }
 }, {
     timestamps: true

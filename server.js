@@ -18,8 +18,9 @@ const typeDefs = gql`
     },
     type Mutation {
         addItem(name: String, price: Float, city: String): ServerResponse
-        updateItem(_id: ID, name: String, price: Float, city: String): ServerResponse
-        deleteItem(_id: ID): ServerResponse
+        updateItem(_id: ID!, name: String, price: Float, city: String): ServerResponse
+        deleteItem(_id: ID!, message: String): ServerResponse
+        undeleteItem(_id: ID!): ServerResponse
     }
     type Item {
         data: Data
@@ -31,6 +32,7 @@ const typeDefs = gql`
         price: Float!
         city: String!
         deleted: Boolean!
+        message: String
     }
     type ServerResponse {
         success: Boolean

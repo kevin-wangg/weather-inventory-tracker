@@ -18,13 +18,18 @@ class ItemDatasource {
         return promise
     }
 
-    async deleteItem(_id) {
-        const promise = await ItemModel.updateOne({_id: _id}, { deleted: true })
+    async deleteItem(_id, message) {
+        const promise = await ItemModel.updateOne({_id: _id}, { deleted: true, message })
         return promise
     }
 
     async updateItem(_id, name, price, city) {
         const promise = await ItemModel.updateOne({_id: _id}, {name, price, city})
+        return promise
+    }
+    
+    async undeleteItem(_id) {
+        const promise = await ItemModel.updateOne({_id: _id}, { deleted: false, message: '' })
         return promise
     }
 }

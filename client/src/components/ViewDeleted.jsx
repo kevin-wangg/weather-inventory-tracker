@@ -16,11 +16,24 @@ const ViewDeleted = () => {
                     price
                     city
                     deleted
+                    message
                 }
-                weather
             }
         }
     `
+    const UNDELETE_ITEM = gql`
+        mutation undeleteItem($id: ID!) {
+            undeleteItem(_id: $id) {
+                success
+                message
+            }
+        }
+    `
+    const [undeleteItemMutation] = useMutation(UNDELETE_ITEM)
+    const undeleteItem = (_id) => {
+        undeleteItemMutation({ variables: { id: _id } })
+        setItemList(oldItemList => oldItemList.filter(item => item.data._id !== _id))
+    }
     useQuery(GET_ITEMS, {
         onCompleted: (data) => {
             console.log(data)
@@ -42,10 +55,12 @@ const ViewDeleted = () => {
                             <Card.Text>
                                 <b>Storage Location:</b> {item.data.city}
                             </Card.Text>
-                            <Card.Text>
-                                <b>Weather: </b> {item.weather}
-                            </Card.Text>
-                            <Button variant="secondary" href={`/edit/${item.data._id}`}>Edit</Button>{' '}
+                            {item.data.message !== "" &&
+                                <Card.Text>
+                                    <b>Deletion comment: </b> {item.data.message}
+                                </Card.Text>
+                            }
+                            <Button variant="secondary" onClick={() => {undeleteItem(item.data._id)}}>Undelete</Button>{' '}
                             </Card.Body>
                         </Card>
                     })}

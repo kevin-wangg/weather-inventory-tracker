@@ -44,13 +44,22 @@ const resolvers = {
                     }
                 })
         },
-        deleteItem: (_, { _id }, { dataSources }) => {
-            console.log(`Delete item: ${_id}`)
-            return dataSources.items.deleteItem(_id)
+        deleteItem: (_, { _id, message }, { dataSources }) => {
+            console.log(`Delete item: ${_id} with message ${message}`)
+            return dataSources.items.deleteItem(_id, message)
                 .then(() => {
                     return {
                         'success': true,
                         'message': 'Item successfully deleted'
+                    }
+                })
+        },
+        undeleteItem: (_, { _id }, { dataSources }) => {
+            return dataSources.items.undeleteItem(_id)
+                .then(() => {
+                    return {
+                        'success': true,
+                        'message': 'Item Successfully undeleted'
                     }
                 })
         }
