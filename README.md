@@ -10,6 +10,10 @@ This is an inventory tracking web application. The backend was built with Node.j
 - Update items
 - View the items as a list
 
+Items are associated with a city storage location. The current weather of the city is provided using the OpenWeather API.
+
+It also supports adding comments with deletions and undeleting.
+
 # How to run
 
 To run this locally, first clone the repository with 
